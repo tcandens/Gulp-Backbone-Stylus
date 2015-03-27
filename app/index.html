@@ -9,6 +9,40 @@
     <!-- endbuild -->
   </head>
   <body>
+    <section id="add-recipe">
+      <form>
+          <fieldset>
+            <legend>Add Recipe</legend>
+            <input id="recipe-name" type="text" placeholder="Recipe Name" />
+            <input id="recipe-servings" type="number" placeholder="Servings" />
+            <fieldset class="ingredient-list">
+              <legend>Ingredients</legend>
+              <ul id="ingredients-list-added">
+                <li>
+                  <span class="ingredients-list-added-name">Broccoli</span>
+                  <span class="ingredients-list-added-qty">
+                    <span>7</span>
+                    <span class="ingredients-list-added-unit">ounces</span>
+                  </span>
+                </li>
+              </ul>
+              <input id="ingredient-name" type="text" placeholder="Ingredient" />
+              <input id="ingredient-qty" type="number" placeholder="Quantity" />
+              <input id="add-ingredient" type="submit" value="Add Ingredient" />
+            </fieldset>
+            <input id="add-recipe" type="submit" value="Add Recipe">
+          </fieldset>
+      </form>
+    </section>
+    <script id="added-ingredient" type="javascript/template">
+      <li>
+        <span class="ingredients-list-added-name"><%= name %></span>
+        <span class="ingredients-list-added-qty">
+          <span><%= quantity %></span>
+          <span class="ingredients-list-added-unit"><%= unit %></span>
+        </span>
+      </li>
+    </script>
     <!-- build:jsDependencies js/dependencies.js -->
     <script src="dependencies/jquery/dist/jquery.js"></script>
     <script src="dependencies/underscore/underscore.js"></script>
