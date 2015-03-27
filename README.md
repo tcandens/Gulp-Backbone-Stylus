@@ -1,6 +1,5 @@
 # Gulp Workflow for small Backbone projects using Stylus
------
-by Joseph Thies
-&copy;2015
+
+Joseph Thies &copy; 2015 MIT
 ----
 ## Getting Started
