@@ -1,0 +1,4 @@
+node_modules
+app/dependencies
+build
+.git
