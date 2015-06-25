@@ -1,8 +1,8 @@
 {
-  "name": "backbone-app-boilerplate",
+  "name": "Seattle Cranes",
   "version": "0.0.1",
   "description": "",
-  "main": "app/index.html",
+  "main": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
