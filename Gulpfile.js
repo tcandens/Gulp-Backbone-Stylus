@@ -16,7 +16,7 @@
           filename: 'bundle.js'
         }
       }))
-      .pipe(gulp.dest('dev'))
+      .pipe(gulp.dest('dev/js'))
   });
 
   // Deletes entire build directory
@@ -50,6 +50,8 @@
     });
   });
 
-  gulp.task('default', [ 'webpack', 'stylus:dev', 'copy:dev', 'serve:dev', 'watch' ]);
+  gulp.task('build:dev', [ 'webpack:dev', 'stylus:dev', 'copy:dev', 'serve:dev' ]);
+
+  gulp.task('default', [ 'build:dev', 'watch:dev' ]);
 
 })();
