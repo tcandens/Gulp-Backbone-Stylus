@@ -44,14 +44,15 @@
 
   gulp.task('serve:dev', function() {
     browserSync.init({
-      serve: {
-        port: 8000
+      port: 8000,
+      server: {
+        baseDir: 'dev'
       }
     });
   });
 
   gulp.task('build:dev', [ 'webpack:dev', 'stylus:dev', 'copy:dev', 'serve:dev' ]);
 
-  gulp.task('default', [ 'build:dev', 'watch:dev' ]);
+  gulp.task('default', [ 'build:dev', 'watch' ]);
 
 })();
