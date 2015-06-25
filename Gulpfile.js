@@ -1,30 +1,55 @@
 (function() {
   'use strict';
   var gulp = require('gulp'),
-      usemin = require('gulp-usemin'),
+      webpack = require('webpack-stream'),
       stylus = require('gulp-stylus'),
       bs = require('browser-sync'),
-      del = require('del');
+      del = require('del'),
+      browserSync = require('browser-sync'),
+      reload = browserSync.reload;
 
-  // Replace development versions of assets and move into build directory
-  gulp.task("usemin", function() {
-    return gulp.src('app/index.html')
-      .pipe(usemin())
-      .pipe(gulp.dest('build'))
+  // Webpack module build
+  gulp.task('webpack:dev', function() {
+    return gulp.src('src/js/master.js')
+      .pipe(webpack({
+        output: {
+          filename: 'bundle.js'
+        }
+      }))
+      .pipe(gulp.dest('dev'))
   });
 
   // Deletes entire build directory
-  gulp.task('clean:build', function() {
-    return del('build');
+  gulp.task('clean:dev', function() {
+    return del('dev');
   });
 
   // Compiles stylus stylesheets into app/css/main.css
   gulp.task('stylus:dev', function() {
-    return gulp.src('app/stylus/main.styl')
+    return gulp.src('src/stylus/main.styl')
       .pipe(stylus())
-      .pipe(gulp.dest('app/css/'));
+      .pipe(gulp.dest('dev/css'));
   });
 
-  
+  gulp.task('watch', function() {
+    gulp.watch([ 'src/js/**/*.js' ], [ 'webpack:dev', reload ]);
+    gulp.watch([ 'src/**/*.html' ], [ 'copy:dev', reload ]);
+    gulp.watch([ 'src/stylus/**/*.styl' ], [ 'stylus:dev', reload ]);
+  });
+
+  gulp.task('copy:dev', function() {
+    return gulp.src('src/**/*.html')
+      .pipe(gulp.dest('dev'));
+  });
+
+  gulp.task('serve:dev', function() {
+    browserSync.init({
+      serve: {
+        port: 8000
+      }
+    });
+  });
+
+  gulp.task('default', [ 'webpack', 'stylus:dev', 'copy:dev', 'serve:dev', 'watch' ]);
 
 })();
